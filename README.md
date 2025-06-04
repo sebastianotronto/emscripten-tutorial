@@ -1,0 +1,65 @@
+# How to port a complex C codebase to the web
+
+*This repository is still work in progress*
+
+This repository contains the source code for the examples discussed in
+a post walkthrough that is going to appear shortly on my website.
+It will be linked here once published.
+
+Each sub-folder is a self-contained example of a C program (or library)
+that can be compiled to [WebAssembly](https://webassembly.org/) using
+[Emscripten](https://emscripten.org), and some JavaScript and HTML code
+that can be used to run the C or C++ code in a web page or in a JavaScript
+runtime such as [Node.js](https://nodejs.org).  Following these steps in
+order will walk you through the process of deploying a complex C or C++
+program (including multithreading, persistent storage, callback functions
+and so on) as a web app.
+
+Besides the source files, each folder contains a few one-line shell
+scripts, for convenience:
+
+* `build.sh`: to build the C / C++ code with Emscripten.
+* `run-node.sh`: to run an example program in Node.js.
+* `run-server.sh`: to start a web server on
+  [localhost:8080](http://localhost:8080) running an example web page
+  (require darkhttpd, see below).
+
+The examples have been tested only on Linux, but should work on any
+UNIX system, and should be easy to adapt to Windows or other OSes.
+Pull requests are welcome.
+
+## Prerequisites
+
+In order to follow this tutorial, you are going to need the following:
+
+1. [Emscripten](https://emscripten.org)
+2. A web server to run locally, such as
+   [darkhttpd](https://github.com/emikulic/darkhttpd)
+3. [Node.js](https://nodejs.org) (this is optional, since a version
+   of Node.js is distributed together with emscripten).
+
+## 0. Hello world
+
+The folder `00_hello_world` contains the simplest possible example.
+
+## 1. Building a library
+
+A common use case for building C or C++ code to WebAssembly is using some
+high-performance library in a web app. In this situation, the code you
+want to build does not have a `main()` entry point, but instead its public
+functions are called from JavaScript. Motivated by this, in the folder
+`01_library` you'll find an extremely simple C library (with only one
+one-line function), and some JavaScript code to run it from a web page.
+
+## 2. Making it a module
+
+In `02_library_modularized` we review the previous example and we build it
+into a
+[module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). The result is the same, but more convenient to use.
+
+## 3. Multi-threading
+
+In `03_threads` we build a more complicated example based on
+[pthreads](https://en.wikipedia.org/wiki/Pthreads). To run this
+example, the web server has to be configured to provide the correct
+`Cross-Origin-*` headers, see `03_threads/run-server.sh` for details.
