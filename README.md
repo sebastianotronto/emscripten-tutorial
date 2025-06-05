@@ -24,6 +24,9 @@ scripts, for convenience:
   [localhost:8080](http://localhost:8080) running an example web page
   (require darkhttpd, see below).
 
+If one of the `run-*` scripts is missing, it means that that example
+is only meant to run in Node.js, or only as a script in a web page.
+
 The examples have been tested only on Linux, but should work on any
 UNIX system, and should be easy to adapt to Windows or other OSes.
 Pull requests are welcome.
@@ -63,3 +66,12 @@ In `03_threads` we build a more complicated example based on
 [pthreads](https://en.wikipedia.org/wiki/Pthreads). To run this
 example, the web server has to be configured to provide the correct
 `Cross-Origin-*` headers, see `03_threads/run-server.sh` for details.
+
+## 4. Don't block the main thread
+
+In `04_no_block` we avoid our calculations blocking the main browser
+thread by using a web worker.
+
+## 5. Callback functions
+
+In `05_callback` the example is extended to include a callback function.
