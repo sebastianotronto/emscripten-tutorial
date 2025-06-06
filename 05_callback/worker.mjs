@@ -2,7 +2,10 @@ import Primes from "./build/primes.mjs";
 
 var primes = await Primes();
 const logPtr = primes.addFunction((cstr) => {
-	postMessage({ message: primes.UTF8ToString(cstr) });
+	const str = primes.UTF8ToString(cstr);
+
+	console.log(str);
+	postMessage({ message: str });
 }, "vp");
 
 onmessage = (e) => {
