@@ -1,24 +1,21 @@
 # How to port a complex C codebase to the web
 
-*This repository is still work in progress*
-
 This repository contains the source code for the examples discussed in
-a post walkthrough that is going to appear shortly on my website.
-It will be linked here once published.
+[this blog post / tutorial](https://sebastiano.tronto.net/blog/2025-06-06-webdev).
 
-Each sub-folder is a self-contained example of a C program (or library)
-that can be compiled to [WebAssembly](https://webassembly.org/) using
-[Emscripten](https://emscripten.org), and some JavaScript and HTML code
-that can be used to run the C or C++ code in a web page or in a JavaScript
+Each sub-folder is a self-contained example of a C or C++ program (or
+library) that can be compiled to [WebAssembly](https://webassembly.org/)
+using [Emscripten](https://emscripten.org), and some JavaScript and HTML
+code that can be used to run this program in a web page or in a JavaScript
 runtime such as [Node.js](https://nodejs.org).  Following these steps in
-order will walk you through the process of deploying a complex C or C++
-program (including multithreading, persistent storage, callback functions
-and so on) as a web app.
+order will walk you through the process of deploying a complex application
+(including multithreading, persistent storage and callback functions)
+as a web app.
 
 Besides the source files, each folder contains a few one-line shell
-scripts, for convenience:
+scripts, for convenience. Usually, the following are present:
 
-* `build.sh`: to build the C / C++ code with Emscripten.
+* `build.sh`: to compile the C code with Emscripten.
 * `run-node.sh`: to run an example program in Node.js.
 * `run-server.sh`: to start a web server on
   [localhost:8080](http://localhost:8080) running an example web page
@@ -43,7 +40,9 @@ In order to follow this tutorial, you are going to need the following:
 
 ## 0. Hello world
 
-The folder `00_hello_world` contains the simplest possible example.
+The folder `00_hello_world` contains the simplest possible example:
+a C program that prints "Hello world" to standard output. The default
+Emscripten HTML template is used to run this code in a web page.
 
 ## 1. Building a library
 
@@ -56,9 +55,10 @@ one-line function), and some JavaScript code to run it from a web page.
 
 ## 2. Making it a module
 
-In `02_library_modularized` we review the previous example and we build it
-into a
-[module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). The result is the same, but more convenient to use.
+In `02_library_modularized` we review
+the previous example and we build it into a
+[module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+The result is the same, but it is more convenient to use.
 
 ## 3. Multi-threading
 
@@ -75,6 +75,8 @@ thread by using a web worker.
 ## 5. Callback functions
 
 In `05_callback` the example is extended to include a callback function.
+The C program uses this function to log its progress back to the
+JavaScript side.
 
 ## 6. Storage
 
@@ -85,6 +87,6 @@ using as backend the
 This example only works in the browser, as other runtimes (such as
 Node.js) require different backends.
 
-In this example we make use for the first time of the `--pre-js` option of
-the compiler to include custom JavaScript code that is run when our module
+In this example we make use time of the `--pre-js` option of the
+compiler to include custom JavaScript code that is run when our module
 loads. Moreover, the C code is split into multiple files for convenience.
