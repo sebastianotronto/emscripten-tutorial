@@ -75,3 +75,16 @@ thread by using a web worker.
 ## 5. Callback functions
 
 In `05_callback` the example is extended to include a callback function.
+
+## 6. Storage
+
+In `06_storage` we show how to use Emscripten's
+[file system API](https://emscripten.org/docs/api_reference/Filesystem-API.html)
+using as backend the
+[indexed DB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API).
+This example only works in the browser, as other runtimes (such as
+Node.js) require different backends.
+
+In this example we make use for the first time of the `--pre-js` option of
+the compiler to include custom JavaScript code that is run when our module
+loads. Moreover, the C code is split into multiple files for convenience.
