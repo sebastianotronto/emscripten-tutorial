@@ -67,6 +67,11 @@ In `03_threads` we build a more complicated example based on
 example, the web server has to be configured to provide the correct
 `Cross-Origin-*` headers, see `03_threads/run-server.sh` for details.
 
+There is also a piece of code meant to run this more complicated library
+function natively (`native.c`). It can be used, for example, to compare
+the performance of native code vs WASM running in Node.js.  You can
+build it with `./build-native.sh` and run it with `./build/native`.
+
 ## 4. Don't block the main thread
 
 In `04_no_block` we avoid our calculations blocking the main browser
